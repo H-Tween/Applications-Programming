@@ -3,10 +3,10 @@
 namespace ConsoleAppProject.App01
 {
     /// <summary>
-    /// Please describe the main features of this App
+    /// Take the users choice of conversion and the number they wish to convert and return the conversion.
     /// </summary>
     /// <author>
-    /// Derek version 0.1
+    /// Harrison Tween version 0.1
     /// </author>
     public class DistanceConverter
     {
@@ -20,13 +20,14 @@ namespace ConsoleAppProject.App01
         public const string MILES = "Miles";
         public const string METRES = "Metres";
 
-        private string unit;
+        public string unit;
 
-        private string newUnit;
-        private string choice;
-        private double value;
+        public string newUnit;
+        public int choice;
+        public double value;
 
-        private double newValue;
+        public double newValue;
+        public bool successfull = false;
 
         public void Run()
         {
@@ -42,35 +43,64 @@ namespace ConsoleAppProject.App01
             Console.WriteLine($"1. {MILES} to {FEET}");
             Console.WriteLine($"2. {FEET} to {MILES}");
             Console.WriteLine($"3. {MILES} to {METRES}");
-            Console.WriteLine("Enter number: ");
-            choice = Console.ReadLine();
+            while (successfull == false)
+            {
+                try
+                {
+                    Console.WriteLine("Enter number: ");
+                    choice = Convert.ToInt16(Console.ReadLine());
+                    if (choice > 3 || choice < 0) 
+                    {
+                        Console.WriteLine("Invalid choice, try again");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        successfull = true;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+            successfull = false;
             Console.WriteLine();
-            Console.WriteLine("Enter conversion number");
-            value = Convert.ToDouble(Console.ReadLine());
-
-            //Console.WriteLine(miles);
+            while (successfull == false)
+            {
+                try
+                {
+                    Console.WriteLine("Enter conversion number");
+                    value = Convert.ToDouble(Console.ReadLine());
+                    successfull = true;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
         }
 
-        private void CalculateDistance()
+        public void CalculateDistance()
         {
             switch (choice)
             {
                 // Miles to feet
-                case "1": 
+                case 1: 
                     unit = MILES;
                     newUnit = FEET;
                     newValue = value * FEET_TO_MILES;
                 break;
 
                 // Feet to miles
-                case "2": 
+                case 2: 
                     unit = FEET;
                     newUnit = MILES; 
                     newValue = value / FEET_TO_MILES; 
                 break;
 
                 // Miles to metres
-                case "3": 
+                case 3: 
                     unit = MILES;
                     newUnit = METRES; 
                     newValue = METRES_TO_MILES * value;
@@ -79,7 +109,7 @@ namespace ConsoleAppProject.App01
             
         }
 
-        private void Output()
+        public void Output()
         {
             // Output
             Console.WriteLine($"{value} {unit} is {newValue} {newUnit}");
