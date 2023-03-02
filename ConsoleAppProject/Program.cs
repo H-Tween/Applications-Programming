@@ -27,11 +27,34 @@ namespace ConsoleAppProject
             Console.WriteLine(" =================================================");
             Console.WriteLine();
 
-            DistanceConverter converter = new DistanceConverter();
-            converter.Run();
 
-            //BMI bmi = new BMI();
-            //bmi.Run();
+            Console.WriteLine("1. App01 - Distance converter");
+            Console.WriteLine("2. App02 - BMI");
+            Console.WriteLine("Enter Number: ");
+            string app = Console.ReadLine();
+            int currentApp = 0;
+            try
+            {
+                currentApp = Convert.ToInt16(app);
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Invalid Input");
+            }
+
+            switch (currentApp)
+            {
+                case 1:
+                    DistanceConverter converter = new DistanceConverter();
+                    converter.Run();
+                break;
+
+                case 2:
+                    BMI bmi = new BMI();
+                    bmi.Run();
+                break;
+
+            }
         }
     }
 }
