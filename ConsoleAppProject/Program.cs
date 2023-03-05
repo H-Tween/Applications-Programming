@@ -36,24 +36,22 @@ namespace ConsoleAppProject
             try
             {
                 currentApp = Convert.ToInt16(app);
+                switch (currentApp)
+                {
+                    case 1:
+                        DistanceConverter converter = new DistanceConverter();
+                        converter.Run();
+                        break;
+
+                    case 2:
+                        BMI bmi = new BMI();
+                        bmi.Run();
+                        break;
+                }
             }
             catch (Exception)
             {
                 Console.WriteLine("Invalid Input");
-            }
-
-            switch (currentApp)
-            {
-                case 1:
-                    DistanceConverter converter = new DistanceConverter();
-                    converter.Run();
-                break;
-
-                case 2:
-                    BMI bmi = new BMI();
-                    bmi.Run();
-                break;
-
             }
         }
     }
