@@ -10,13 +10,13 @@ namespace ConsoleAppProject.App02
     /// </author>
     public class BMI
     {
-        public double choice;
+        public int choice;
         private double height;
         private double weight;
         private double bmi;
 
         public int stone;
-        public int pound;
+        public double pound;
         public int feet;
         public int inch;
 
@@ -37,7 +37,7 @@ namespace ConsoleAppProject.App02
             Console.WriteLine("2. Metric Units - Weight in Kilograms and height in metres");
             Console.WriteLine("Enter number");
             Console.WriteLine();
-            choice = Convert.ToDouble(Console.ReadLine());
+            choice = Convert.ToInt32(Console.ReadLine());
             if (choice == 1)
             {
                 Console.WriteLine("Enter your height in feet:");
@@ -49,7 +49,7 @@ namespace ConsoleAppProject.App02
                 stone = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("Enter your weight in pounds");
                 pound = Convert.ToInt32(Console.ReadLine());
-       
+
 
             }
             else if (choice == 2)
@@ -77,17 +77,19 @@ namespace ConsoleAppProject.App02
             else if (choice == 2)
             {
                 bmi = weight / (height * height);
+                
             }
+            bmi = Math.Round(bmi, 1);
         }
 
         private void Output()
         {
             Console.WriteLine($"Your BMI is {bmi}");
-            if (bmi < 18.50)
+            if (bmi < 18.5)
             {
                 Console.WriteLine("You are Underweight");
             }
-            else if (bmi >= 18.50 && bmi <= 24.90)
+            else if (bmi >= 18.5 && bmi <= 24.9)
             {
                 Console.WriteLine("You are Normal");
             }
