@@ -18,6 +18,7 @@ namespace ConsoleAppProject
     {
         public static void Main(string[] args)
         {
+
             Console.ForegroundColor = ConsoleColor.Yellow;
 
             Console.WriteLine();
@@ -30,7 +31,8 @@ namespace ConsoleAppProject
 
             Console.WriteLine("1. App01 - Distance converter");
             Console.WriteLine("2. App02 - BMI");
-            Console.WriteLine("Enter Number: ");
+            Console.WriteLine("3. App03 - StudentMarks");
+            Console.Write("Enter Number > ");
             string app = Console.ReadLine();
             int currentApp = 0;
             try
@@ -47,6 +49,12 @@ namespace ConsoleAppProject
                         BMI bmi = new BMI();
                         bmi.Run();
                         break;
+
+                    case 3:
+                        StudentGrades student = new StudentGrades();
+                        student.Run();
+                        break;
+
                 }
             }
             catch (Exception)
