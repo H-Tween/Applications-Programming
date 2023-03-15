@@ -1,45 +1,26 @@
-using ConsoleAppProject.App01;
+using ConsoleAppProject.App03;
+using System;
 
 namespace ConsoleAppUnitTest
 {
     [TestClass]
-    public class App01Test
+    public class App03Test
     {
         [TestMethod]
-        public void TestFeetToMiles()
+        public void CheckStudent01Grade()
         {
-            DistanceConverter converter = new DistanceConverter();
-            converter.choice = 2;
-            converter.value = 5280;
-            converter.CalculateDistance();
+            StudentGrades student = new StudentGrades();
+            student.CreateDictionary();
+            student.choice = 1;
+            student.studentNumber = 1;
+            student.newMark = 70;
+            student.Grade(student.newMark);
 
-            double expectedOutput = 1.0;
+            Grades expectedOutput = Grades.A;
+            var actualOutput = student.grade;
 
-            Assert.AreEqual(expectedOutput, converter.newValue);
+            Assert.AreEqual(expectedOutput, actualOutput);
         }
-        [TestMethod]
-        public void TestMilesToFeet()
-        {
-            DistanceConverter converter = new DistanceConverter();
-            converter.choice = 1;
-            converter.value = 1;
-            converter.CalculateDistance();
 
-            double expectedOutput = 5280;
-
-            Assert.AreEqual(expectedOutput, converter.newValue);
-        }
-        [TestMethod]
-        public void TestMilesToMeters()
-        {
-            DistanceConverter converter = new DistanceConverter();
-            converter.choice = 3;
-            converter.value = 2;
-            converter.CalculateDistance();
-
-            double expectedOutput = 3218.68;
-
-            Assert.AreEqual(expectedOutput, converter.newValue);
-        }
     }
 }

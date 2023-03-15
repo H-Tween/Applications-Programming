@@ -5,6 +5,8 @@ using System.ComponentModel.DataAnnotations;
 using ConsoleAppProject.Helpers;
 using System.Reflection;
 using System.ComponentModel.Design;
+using System.Diagnostics;
+using System.Linq;
 
 namespace ConsoleAppProject.App03
 {
@@ -19,6 +21,7 @@ namespace ConsoleAppProject.App03
         public int newMark;
         public string grade;
         public int meanMark;
+        public int studentNumber;
 
 
         private bool running = true;
@@ -78,7 +81,7 @@ namespace ConsoleAppProject.App03
                 while (running == true)
                 {
                     Console.Write("Enter number of student > ");
-                    int studentNumber = Convert.ToInt32(Console.ReadLine());
+                    studentNumber = Convert.ToInt32(Console.ReadLine());
 
                     if (Students.TryGetValue(studentNumber, out newMark))
                     {
@@ -88,7 +91,7 @@ namespace ConsoleAppProject.App03
                     }
 
                     else { Console.WriteLine("Student doesn't exist"); }
-                    
+
                     Console.WriteLine();
                     Console.Write("Would you like to enter another students mark? (y/n) > ");
                     string decision = Console.ReadLine();
@@ -126,7 +129,25 @@ namespace ConsoleAppProject.App03
             else if (choice == 5)
             {
                 //Console.WriteLine(Grades.A); // write description of grades
-                Console.WriteLine(Grades.A.ToString(DescriptionAttribute as );
+                var enumType = typeof(Grades);
+
+                foreach (var studentGrade in Enum.GetValues(enumType))
+                {
+                    // Get the public member information from the enumeration value and type
+                    var memberInfos = enumType.GetMember(studentGrade.ToString());
+                    var enumValueMemberInfo = memberInfos.First(m => m.DeclaringType == enumType);
+
+                    // Get the attributes from the member info
+                    var displayNameValueAttributes = enumValueMemberInfo.GetCustomAttributes(typeof(DisplayAttribute), false);
+                    var descriptionValueAttributes = enumValueMemberInfo.GetCustomAttributes(typeof(DescriptionAttribute), false);
+
+                    // Read the attribute properties
+                    var displayName = ((DisplayAttribute)displayNameValueAttributes[0]).Name;
+                    var description = ((DescriptionAttribute)descriptionValueAttributes[0]).Description;
+
+                    // Write them to the output window
+                    Console.WriteLine($"The '{studentGrade}' grade is a '{displayName}' which is '{description}'");
+                }
             }
             else if (choice == 6)
             {
