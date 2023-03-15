@@ -17,9 +17,8 @@ namespace ConsoleAppUnitTest
             student.Grade(student.newMark);
 
             Grades expectedOutput = Grades.A;
-            var actualOutput = student.grade;
 
-            Assert.AreEqual(expectedOutput, actualOutput);
+            Assert.AreEqual(expectedOutput, student.grade);
         }
 
     }

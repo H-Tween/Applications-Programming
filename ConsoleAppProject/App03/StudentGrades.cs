@@ -22,7 +22,7 @@ namespace ConsoleAppProject.App03
         public string grade;
         public int meanMark;
         public int studentNumber;
-
+        
 
         private bool running = true;
 
@@ -105,7 +105,7 @@ namespace ConsoleAppProject.App03
             {
                 foreach (KeyValuePair<int, int> student in Students)
                 {
-                    if (choice == 2) { Console.WriteLine("Student {0} :, Mark: {1}", student.Key, student.Value); }
+                    if (choice == 2) { Console.WriteLine("Student {0} : Mark: {1}", student.Key, student.Value); }
                     else
                     {
                         meanMark += student.Value;
