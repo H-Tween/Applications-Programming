@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using ConsoleAppProject.Helpers;
-using System.Collections.Generic;
 using System.Reflection;
 using System.ComponentModel.Design;
 
@@ -127,6 +126,7 @@ namespace ConsoleAppProject.App03
             else if (choice == 5)
             {
                 //Console.WriteLine(Grades.A); // write description of grades
+                Console.WriteLine(Grades.A.ToString(DescriptionAttribute as );
             }
             else if (choice == 6)
             {
