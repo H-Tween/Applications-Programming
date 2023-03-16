@@ -10,16 +10,60 @@ namespace ConsoleAppUnitTest
         public void CheckStudent01Grade()
         {
             StudentGrades student = new StudentGrades();
-            student.CreateDictionary();
-            student.choice = 1;
-            student.studentNumber = 1;
             student.newMark = 70;
-            student.Grade(student.newMark);
+            Grades grade = student.Grade(student.newMark);
 
             Grades expectedOutput = Grades.A;
 
-            Assert.AreEqual(expectedOutput, student.grade);
+            Assert.AreEqual(expectedOutput, grade);
         }
 
+        [TestMethod]
+        public void CheckStudent02Grade()
+        {
+            StudentGrades student = new StudentGrades();
+            student.newMark = 60;
+            Grades grade = student.Grade(student.newMark);
+
+            Grades expectedOutput = Grades.B;
+
+            Assert.AreEqual(expectedOutput, grade);
+        }
+
+        [TestMethod]
+        public void CheckStudent03Grade()
+        {
+            StudentGrades student = new StudentGrades();
+            student.newMark = 50;
+            Grades grade = student.Grade(student.newMark);
+
+            Grades expectedOutput = Grades.C;
+
+            Assert.AreEqual(expectedOutput, grade);
+        }
+
+        [TestMethod]
+        public void CheckStudent04Grade()
+        {
+            StudentGrades student = new StudentGrades();
+            student.newMark = 40;
+            Grades grade = student.Grade(student.newMark);
+
+            Grades expectedOutput = Grades.D;
+
+            Assert.AreEqual(expectedOutput, grade);
+        }
+
+        [TestMethod]
+        public void CheckStudent05Grade()
+        {
+            StudentGrades student = new StudentGrades();
+            student.newMark = 30;
+            Grades grade = student.Grade(student.newMark);
+
+            Grades expectedOutput = Grades.F;
+
+            Assert.AreEqual(expectedOutput, grade);
+        }
     }
 }

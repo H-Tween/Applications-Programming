@@ -1,6 +1,8 @@
 ﻿using ConsoleAppProject.App01;
 using ConsoleAppProject.App02;
 using ConsoleAppProject.App03;
+using ConsoleAppProject.App04;
+using ConsoleAppProject.App04Attempt1;
 using ConsoleAppProject.Helpers;
 using System;
 
@@ -32,6 +34,7 @@ namespace ConsoleAppProject
             Console.WriteLine("1. App01 - Distance converter");
             Console.WriteLine("2. App02 - BMI");
             Console.WriteLine("3. App03 - StudentMarks");
+            Console.WriteLine("4. App04 - NewsFeed");
             Console.Write("Enter Number > ");
             string app = Console.ReadLine();
             int currentApp = 0;
@@ -53,6 +56,11 @@ namespace ConsoleAppProject
                     case 3:
                         StudentGrades student = new StudentGrades();
                         student.Run();
+                        break;
+
+                    case 4:
+                        Post post = new Post();
+                        post.DisplayMenu();
                         break;
 
                 }

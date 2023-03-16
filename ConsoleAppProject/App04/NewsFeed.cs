@@ -1,6 +1,7 @@
-﻿using System;
+﻿using ConsoleAppProject.Helpers;
+using System;
 using System.Collections.Generic;
-
+using System.Security.Cryptography.X509Certificates;
 
 namespace ConsoleAppProject.App04
 {
@@ -72,6 +73,29 @@ namespace ConsoleAppProject.App04
                 photo.Display();
                 Console.WriteLine();   // empty line between posts
             }
+        }
+
+        public void DisplayMenu()
+        {
+            bool quit = false;
+
+            string[] choices = new string[] { "Add Message", "Add Photo", "Display All", "Quit" };
+
+            do
+            {
+                int choice = ConsoleHelper.SelectChoice(choices);
+
+                switch (choice)
+                {
+                    //case 1: AddMessagePost(); break;
+                    //case 2: AddPhotoPost(); break;
+                    case 3: Display(); break;
+                    case 4: quit = true; break;
+                }
+            } while (!quit);
+
+
+
         }
     }
 

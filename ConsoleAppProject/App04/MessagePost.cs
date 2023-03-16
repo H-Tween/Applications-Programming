@@ -15,7 +15,7 @@ namespace ConsoleAppProject.App04
     public class MessagePost
     {
         private int likes;
-
+        
         private readonly List<String> comments;
 
 
