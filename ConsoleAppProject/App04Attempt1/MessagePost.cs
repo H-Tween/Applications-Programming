@@ -32,10 +32,6 @@ namespace ConsoleAppProject.App04Attempt1
         {
             Username = author;
             Message = text;
-            Timestamp = DateTime.Now;
-
-            likes = 0;
-            comments = new List<String>();
         }
 
 
@@ -47,10 +43,13 @@ namespace ConsoleAppProject.App04Attempt1
         ///</summary>
         public override void Display()
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine();
-            Console.WriteLine($"    Author: {Username}");
             Console.WriteLine($"    Message: {Message}");
-            Console.WriteLine($"    Time Elpased: {FormatElapsedTime(Timestamp)}");
+            Console.WriteLine();
+            Console.WriteLine($"    PostID:         {PostId}");
+            Console.WriteLine($"    Author:         {Username}");
+            Console.WriteLine($"    Time Elpased:   {FormatElapsedTime(Timestamp)}");
             Console.WriteLine();
 
             if (likes > 0)
@@ -68,7 +67,11 @@ namespace ConsoleAppProject.App04Attempt1
             }
             else
             {
-                Console.WriteLine($"    {comments.Count}  comment(s). Click here to view.");
+                Console.WriteLine("     Comments:   ");
+                foreach (string comment in comments)
+                {
+                    Console.WriteLine($"        {comment}  ");
+                }
             }
         }   
     }

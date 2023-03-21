@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Xml.Linq;
 
 
@@ -40,10 +41,7 @@ namespace ConsoleAppProject.App04Attempt1
             Username = author;
             this.Filename = filename;
             this.Caption = caption;
-            Timestamp = DateTime.Now;
 
-            likes = 0;
-            comments = new List<String>();
         }
 
         ///<summary>
@@ -54,11 +52,14 @@ namespace ConsoleAppProject.App04Attempt1
         ///</summary>
         public override void Display()
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine();
-            Console.WriteLine($"    Author: {Username}");
             Console.WriteLine($"    Filename: [{Filename}]");
             Console.WriteLine($"    Caption: {Caption}");
-            Console.WriteLine($"    Time Elpased: {FormatElapsedTime(Timestamp)}");
+            Console.WriteLine();
+            Console.WriteLine($"    PostID:         {PostId}");
+            Console.WriteLine($"    Author:         {Username}");
+            Console.WriteLine($"    Time Elpased:   {FormatElapsedTime(Timestamp)}");
             Console.WriteLine();
 
             if (likes > 0)
@@ -76,7 +77,11 @@ namespace ConsoleAppProject.App04Attempt1
             }
             else
             {
-                Console.WriteLine($"    Comment(s): {comments.Count}  Click here to view.");
+                Console.WriteLine("    Comments:");
+                foreach (string comment in comments)
+                {
+                    Console.WriteLine($"    {comment}  ");
+                }
             }
         } 
     }

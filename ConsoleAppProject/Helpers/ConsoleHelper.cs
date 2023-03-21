@@ -103,7 +103,9 @@ namespace ConsoleAppProject.Helpers
                 if (number < min || number > max)
                 {
                     isValid = false;
-                    Console.WriteLine($"Number must be between {min} and {max}");
+                    Console.WriteLine();
+                    Console.WriteLine($" Number must be between {min} and {max}");
+                    Console.WriteLine();
                 }
                 else isValid = true;
 
@@ -125,7 +127,7 @@ namespace ConsoleAppProject.Helpers
 
             Console.WriteLine("\n ---------------------------------");
             Console.WriteLine($"    {heading}          ");
-            Console.WriteLine("     by Derek Peacock           ");
+            Console.WriteLine("     by Harrison Tween           ");
             Console.WriteLine(" ---------------------------------" +
                 "\n");
 
