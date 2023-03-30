@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 
-namespace ConsoleAppProject.App04
+namespace ConsoleAppProject.App04Original
 {
     ///<summary>
     /// The NewsFeed class stores news posts for the news feed in a social network 

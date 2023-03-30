@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Security.Cryptography.X509Certificates;
 
-namespace ConsoleAppProject.App04Attempt1
+namespace ConsoleAppProject.App04
 {
     ///<summary>
     /// The Post class stores news posts for the news feed in a social network 
@@ -241,6 +241,7 @@ namespace ConsoleAppProject.App04Attempt1
 
         public void RemovePost()
         {
+            Display();
             postExists = PostsExist();
             if (postExists)
             {
@@ -248,7 +249,7 @@ namespace ConsoleAppProject.App04Attempt1
                 Post post = FindPost(id);
                 if (post == null)
                 {
-                    Console.WriteLine($" \n Post with ID = {id} does not exist!\n");
+                    Console.WriteLine($" \n This post does not exist!\n");
                 }
                 else
                 {
@@ -299,6 +300,7 @@ namespace ConsoleAppProject.App04Attempt1
 
         public void Author()
         {
+            Display();
             Console.Write(" Enter authors name > ");
             string userAuthor = Console.ReadLine();
             int posts = 0;
@@ -366,11 +368,10 @@ namespace ConsoleAppProject.App04Attempt1
             string[] choices = new string[] { "Add Message", "Add Photo", "Remove post", "Display All", "Add a comment", "Like a post", "Unlike a post", "Display by author", "Quit" };
 
             // testing
-            string author = "name";
-            string filename = "filename";
-            string caption = "caption";
-            PhotoPost post = new PhotoPost(author, filename, caption);
-            photos.Add(post);
+            string author = "Author name";
+            string filename = "ThisFilename";
+            string caption = "Caption";
+            photos.Add(new PhotoPost(author, filename, caption));
 
             Console.WriteLine();
 
