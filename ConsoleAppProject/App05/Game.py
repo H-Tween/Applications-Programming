@@ -26,6 +26,11 @@ playerY = 300
 flying = False
 playerSpeedY = 0
 gravity = 0.3
+mapSpeed = 2
+
+score = 0
+active = True
+
 
 def generateNew():
     global playerY
@@ -65,6 +70,32 @@ def movePlayer(playerY, speed, flying):
 
     return playerY, speed
 
+def moveRectangles(rectangles):
+    global score
+    for i in range(len(rectangles)):
+        rectangles[i] = (rectangles[i][0] - mapSpeed, rectangles[i][1], rectangleWidth, rectangles[i][3])
+        if rectangles[i][0] + rectangleWidth < 0:
+            rectangles.pop(1) # top rectangle    ( both have same X coordinate)
+            rectangles.pop(0) # bottom rectangle
+            topHeight = random.randint(rectangles[-2][3] - padding, rectangles[-2][3] + padding)
+
+            if topHeight < 0:       # if padding takes the square off the screen
+                topHeight = 0
+            elif topHeight > 300:   # if padding takes the square off the screen
+                topHeight = 300
+            rectangles.append((rectangles[-2][0] + rectangleWidth, 0, rectangleWidth, topHeight))
+            rectangles.append((rectangles[-2][0] + rectangleWidth, topHeight + 300, rectangleWidth, HEIGHT))
+            score += 1
+
+    return rectangles
+
+def collisionCheck(rectangles, playerCircle, active):
+    for i in range(len(rectangles)):
+        if playerCircle.colliderect(rectangles[i]):
+            active = False
+
+    return active
+
 run = True
 
 while run:
@@ -77,7 +108,10 @@ while run:
 
     drawMap(mapRectangles)
     player = drawPlayer()
-    playerY, playerSpeedY = movePlayer(playerY, playerSpeedY, flying)
+    if active:
+        playerY, playerSpeedY = movePlayer(playerY, playerSpeedY, flying)
+        mapRectangles = moveRectangles(mapRectangles)
+    active = collisionCheck(mapRectangles, player, active)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
