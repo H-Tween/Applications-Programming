@@ -8,7 +8,7 @@ WIDTH = 1000
 
 screen = pygame.display.set_mode([WIDTH, HEIGHT])
 
-pygame.display.set_caption('Helicopter in Python!')
+pygame.display.set_caption('Game')
 font = pygame.font.Font('freesansbold.ttf', 20)
 
 fps = 60
@@ -19,6 +19,8 @@ mapRectangles = []
 rectangleWidth = 5
 rectangleTotal = WIDTH//rectangleWidth
 padding = 15
+
+playerY = 300
 
 def generateNew():
     global playerY
