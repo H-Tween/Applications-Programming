@@ -20,7 +20,12 @@ rectangleWidth = 5
 rectangleTotal = WIDTH//rectangleWidth
 padding = 15
 
+playerX = 100
 playerY = 300
+
+flying = False
+playerSpeedY = 0
+gravity = 0.3
 
 def generateNew():
     global playerY
@@ -45,6 +50,21 @@ def drawMap(rectangles):
         pygame.draw.rect(screen, 'purple', rectangles[i])
     pygame.draw.rect(screen, 'dark gray', [0, 0, WIDTH, HEIGHT], 12)
 
+def drawPlayer():
+    # draw player hitbox and image
+    player = pygame.draw.circle(screen, 'white', (playerX, playerY), 20)
+    return player
+
+def movePlayer(playerY, speed, flying):
+    if flying:
+        speed += gravity
+    else:
+        speed -= gravity
+
+    playerY -= speed
+
+    return playerY, speed
+
 run = True
 
 while run:
@@ -56,10 +76,18 @@ while run:
         newMap = False
 
     drawMap(mapRectangles)
+    player = drawPlayer()
+    playerY, playerSpeedY = movePlayer(playerY, playerSpeedY, flying)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                flying = True
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_SPACE:
+                flying = False
 
     pygame.display.flip()
 
