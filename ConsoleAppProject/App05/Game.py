@@ -10,6 +10,7 @@ screen = pygame.display.set_mode([WIDTH, HEIGHT])
 
 pygame.display.set_caption('Game')
 font = pygame.font.Font('freesansbold.ttf', 20)
+largeFont = pygame.font.Font('freesansbold.ttf', 40)
 
 fps = 60
 timer = pygame.time.Clock()
@@ -31,6 +32,12 @@ mapSpeed = 2
 score = 0
 highScore = 0
 active = True
+countdown = 0
+restart = False
+startTimer = 0#
+endGameCounter = 0
+
+flickering = False
 
 playerImage = pygame.transform.scale(pygame.image.load('ConsoleAppProject\App05\heliPic.png'), (70, 40))
 
@@ -75,6 +82,24 @@ def movePlayer(playerY, speed, flying):
 
     return playerY, speed
 
+def drawStartCounter(currentCountDown):
+    if currentCountDown < 60:
+        startTimer = 3
+    elif currentCountDown < 120:
+        startTimer = 2
+    else:
+        startTimer = 1
+
+    startGameText = largeFont.render(f'Starting in: {startTimer}', True, 'white')
+    screen.blit(startGameText, (330, 300))
+
+def drawEndGame():
+    endGameText = largeFont.render(f'GAME OVER', True, 'white')
+    screen.blit(endGameText, (330, 300))
+
+
+    
+
 def moveRectangles(rectangles):
     global score
     for i in range(len(rectangles)):
@@ -107,6 +132,28 @@ while run:
     screen.fill('black')
     timer.tick(fps)
 
+    if not restart:
+    # Countdown
+        if countdown < 180:
+            countdown += 1
+            active = False
+        else:
+            active = True
+    
+    if endGameCounter < 180:
+        endGameCounter += 1
+    else:
+        endGameCounter = 0
+
+    if endGameCounter > 60 and endGameCounter < 120:
+        flickering = True
+    else:
+        flickering = False
+
+
+
+
+
     if newMap:
         mapRectangles = generateNew()
         newMap = False
@@ -116,7 +163,10 @@ while run:
     if active:
         playerY, playerSpeedY = movePlayer(playerY, playerSpeedY, flying)
         mapRectangles = moveRectangles(mapRectangles)
-    active = collisionCheck(mapRectangles, player, active)
+    if countdown == 180 and active:
+        active = collisionCheck(mapRectangles, player, active)
+        if active == False:
+            restart = True
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -125,9 +175,11 @@ while run:
             if event.key == pygame.K_SPACE:
                 flying = True
             if event.key == pygame.K_RETURN:
-                if not active:
+                if not active and restart:
                     newMap = True
-                    active = True
+                    active = False
+                    restart = False
+                    countdown = 0
                     playerSpeedY = 0
                     mapSpeed = 2
                     if score > highScore:
@@ -146,6 +198,13 @@ while run:
     screen.blit(font.render(f'High Score: {highScore}', True, 'white'), (20, 565))
     if not active:
         screen.blit(font.render('Press Enter to Restart', True, 'white'), (380, 565))
+
+    if countdown < 180:
+        drawStartCounter(countdown)
+
+    if not active and restart and not flickering:
+        drawEndGame()
+
 
     pygame.display.flip()
 
