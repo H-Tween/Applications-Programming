@@ -29,7 +29,10 @@ gravity = 0.3
 mapSpeed = 2
 
 score = 0
+highScore = 0
 active = True
+
+playerImage = pygame.transform.scale(pygame.image.load('ConsoleAppProject\App05\heliPic.png'), (70, 40))
 
 
 def generateNew():
@@ -57,7 +60,9 @@ def drawMap(rectangles):
 
 def drawPlayer():
     # draw player hitbox and image
-    player = pygame.draw.circle(screen, 'white', (playerX, playerY), 20)
+    #screen.blit(playerImage, (playerX - 45, playerY - 25))
+    player = pygame.draw.circle(screen, 'black', (playerX, playerY), 20)
+    screen.blit(playerImage, (playerX - 45, playerY - 25))
     return player
 
 def movePlayer(playerY, speed, flying):
@@ -119,9 +124,28 @@ while run:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
                 flying = True
+            if event.key == pygame.K_RETURN:
+                if not active:
+                    newMap = True
+                    active = True
+                    playerSpeedY = 0
+                    mapSpeed = 2
+                    if score > highScore:
+                        highScore = score
+                    score = 0
+
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_SPACE:
                 flying = False
+
+
+    mapSpeed = 2 + (score//50)/4
+
+    screen.blit(font.render(f'Score: {score}', True, 'white'), (20, 15))
+    #screen.blit(font.render(f'High Score: {highScore}', True, 'white'), (850, 15))
+    screen.blit(font.render(f'High Score: {highScore}', True, 'white'), (20, 565))
+    if not active:
+        screen.blit(font.render('Press Enter to Restart', True, 'white'), (380, 565))
 
     pygame.display.flip()
 
