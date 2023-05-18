@@ -34,13 +34,12 @@ highScore = 0
 active = True
 countdown = 0
 restart = False
-startTimer = 0#
+startTimer = 0
 endGameCounter = 0
 
 flickering = False
 
 playerImage = pygame.transform.scale(pygame.image.load('ConsoleAppProject\App05\heliPic.png'), (70, 40))
-
 
 def generateNew():
     global playerY
@@ -97,9 +96,6 @@ def drawEndGame():
     endGameText = largeFont.render(f'GAME OVER', True, 'white')
     screen.blit(endGameText, (330, 300))
 
-
-    
-
 def moveRectangles(rectangles):
     global score
     for i in range(len(rectangles)):
@@ -150,16 +146,13 @@ while run:
     else:
         flickering = False
 
-
-
-
-
     if newMap:
         mapRectangles = generateNew()
         newMap = False
 
     drawMap(mapRectangles)
     player = drawPlayer()
+
     if active:
         playerY, playerSpeedY = movePlayer(playerY, playerSpeedY, flying)
         mapRectangles = moveRectangles(mapRectangles)
@@ -190,12 +183,15 @@ while run:
             if event.key == pygame.K_SPACE:
                 flying = False
 
-
-    mapSpeed = 2 + (score//50)/4
+    if mapSpeed < 10:
+        mapSpeed = 2 + (score//50)/8
+    elif mapSpeed < 20:
+          mapSpeed = 2 + (score//100)/4
 
     screen.blit(font.render(f'Score: {score}', True, 'white'), (20, 15))
     #screen.blit(font.render(f'High Score: {highScore}', True, 'white'), (850, 15))
     screen.blit(font.render(f'High Score: {highScore}', True, 'white'), (20, 565))
+
     if not active:
         screen.blit(font.render('Press Enter to Restart', True, 'white'), (380, 565))
 
@@ -204,7 +200,6 @@ while run:
 
     if not active and restart and not flickering:
         drawEndGame()
-
 
     pygame.display.flip()
 
